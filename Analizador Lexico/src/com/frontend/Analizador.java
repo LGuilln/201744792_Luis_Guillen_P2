@@ -17,6 +17,10 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import com.backend.Lexico;
+import com.backend.Validacion_T;
+
+
 /**
  *
  * @author luedu
@@ -76,6 +80,7 @@ public class Analizador extends javax.swing.JFrame {
     String operacionales ="+,-,*,/,^,**,//,++,--,^^";
     String [] agrupacion ={"(,),[,],{,}"};
     String [] relacionales= {"<,>,==,="};
+    String [] signo= {",;"};
     
     String [] errores1;
     private Object data;
@@ -91,11 +96,6 @@ public class Analizador extends javax.swing.JFrame {
 
     }
 
-     /**
-     * Método para abrir el archivo de entrada
-     * @param archivo
-     * @return 
-     */
     public String AbrirArchivo(File archivo){
         String docu = "";
         try {
@@ -110,12 +110,6 @@ public class Analizador extends javax.swing.JFrame {
         return docu;
     }
     
-    /**
-     * Método para guardar archivo
-     * @param archivo
-     * @param docu
-     * @return 
-     */
     public String GuardarArchivo(File archivo, String docu){
         String mensaje= null;
         try {
@@ -141,9 +135,11 @@ public class Analizador extends javax.swing.JFrame {
         jBClean = new javax.swing.JButton();
         jBOpen = new javax.swing.JButton();
         jBExport = new javax.swing.JButton();
+        ButtonSalir = new javax.swing.JButton();
         jBExit = new javax.swing.JButton();
         jBHome = new javax.swing.JButton();
         jBSave = new javax.swing.JButton();
+        jTextArea2 = new java.awt.TextArea();
         jBAnalizar = new javax.swing.JButton();
         jName = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -186,6 +182,16 @@ public class Analizador extends javax.swing.JFrame {
         });
         getContentPane().add(jBExport, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 220, 70, 70));
 
+        ButtonSalir.setBackground(new java.awt.Color(102, 255, 0));
+        ButtonSalir.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
+        ButtonSalir.setText("Tabla");
+        ButtonSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonSalirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(ButtonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 10, 80, 30));
+
         jBExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit icon.png"))); // NOI18N
         jBExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -213,6 +219,7 @@ public class Analizador extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jBSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 110, 60, 60));
+        getContentPane().add(jTextArea2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 600, 500, 120));
 
         jBAnalizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/analizar.png"))); // NOI18N
         jBAnalizar.addActionListener(new java.awt.event.ActionListener() {
@@ -234,7 +241,7 @@ public class Analizador extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 750, 420));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 750, 390));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/WallpaperIz.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");
@@ -276,9 +283,9 @@ public class Analizador extends javax.swing.JFrame {
             fw.write("<HR>" + "\n" + "\n");
             fw.write("<BR><CENTER><TABLE BORDER=1>\n");
             fw.write("	<TR>\n");
-            fw.write("	<TD ALIGN=\"CENTER\"><FONT COLOR=\"BLACK\"><B>NO.</B></FONT></TD>\n");
+            fw.write("	<TD ALIGN=\"CENTER\"><FONT COLOR=\"BLACK\"><B>No.</B></FONT></TD>\n");
             fw.write("	<TD ALIGN=\"CENTER\"><FONT COLOR=\"BLACK\"><B>Lexema</B></FONT></TD>\n");
-            fw.write("	<TD ALIGN=\"CENTER\"><FONT COLOR=\"BLACK\"><B>Descripcion</B></FONT></TD>\n");
+            fw.write("	<TD ALIGN=\"CENTER\"><FONT COLOR=\"BLACK\"><B>Descripción</B></FONT></TD>\n");
 
             fw.write("	</TR>\n");
             String[] result = jTextArea1.getText().split("\\s");
@@ -310,7 +317,10 @@ public class Analizador extends javax.swing.JFrame {
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_jBErrorActionPerformed
-
+/**
+     * Botón de guardar mi txt
+     * @param evt 
+     */
     private void jBSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSaveActionPerformed
         if (seleccionar.showDialog(null, "Guardar")==JFileChooser.APPROVE_OPTION) {
             archivo=seleccionar.getSelectedFile();
@@ -333,11 +343,19 @@ public class Analizador extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jBSaveActionPerformed
 
+     /**
+     * Botón para Limpiar area de Texto
+     * @param evt 
+     */
     private void jBCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCleanActionPerformed
         jTextArea1.setText(""); 
         // TODO add your handling code here:
     }//GEN-LAST:event_jBCleanActionPerformed
-
+ /**
+     * Método para abrir un archivo de Texto
+     * @param evt 
+     */
+    
     private void jBOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBOpenActionPerformed
 
         if (seleccionar.showDialog(null, "Abrir")==JFileChooser.APPROVE_OPTION) {
@@ -355,6 +373,11 @@ public class Analizador extends javax.swing.JFrame {
           // TODO add your handling code here:
     }//GEN-LAST:event_jBOpenActionPerformed
 
+    /**
+     * Método para exportar tabla
+     * @param evt 
+     */
+    
     private void jBExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExportActionPerformed
         int numero=0;
         if (ConERROR<1){
@@ -372,13 +395,13 @@ public class Analizador extends javax.swing.JFrame {
                 fw.write("<HR>" + "\n" + "\n");
                 fw.write("<BR><CENTER><TABLE BORDER=1>\n");
                 fw.write("	<TR>\n");
-                fw.write("	<TD ALIGN=\"CENTER\"><FONT COLOR=\"BLACK\"><B>NO.</B></FONT></TD>\n");
+                fw.write("	<TD ALIGN=\"CENTER\"><FONT COLOR=\"BLACK\"><B>TOKEN</B></FONT></TD>\n");
                 fw.write("	<TD ALIGN=\"CENTER\"><FONT COLOR=\"BLACK\"><B>DESCRIPCIÓN</B></FONT></TD>\n");
                 fw.write("	<TD ALIGN=\"CENTER\"><FONT COLOR=\"BLACK\"><B>LEXEMA</B></FONT></TD>\n");
 
                 fw.write("	<TD ALIGN=\"CENTER\"><FONT COLOR=\"BLACK\"><B>FILA</B></FONT></TD>\n");
                 fw.write("	<TD ALIGN=\"CENTER\"><FONT COLOR=\"BLACK\"><B>COLUMNA</B></FONT></TD>\n");
-                fw.write("	<TD ALIGN=\"CENTER\"><FONT COLOR=\"BLACK\"><B>TOKEN</B></FONT></TD>\n");
+                fw.write("	<TD ALIGN=\"CENTER\"><FONT COLOR=\"BLACK\"><B>CÁRACTERES</B></FONT></TD>\n");
                 fw.write("	</TR>\n");
 
                 for (int i=0; i<base.length;i++){
@@ -440,30 +463,42 @@ public class Analizador extends javax.swing.JFrame {
         }catch(IOException er){
             System.out.println(er);
         }
-
-        }else{
-            JOptionPane.showMessageDialog(null, "Su analisis tiene algun error, No se puede Realizar el Archivo de Tokens");
-        }
         try {
             File path;
             path = new File ("C:\\Users\\luedu\\Desktop\\LEGR_P2\\Analizador Lexico\\Analizados\\Tokens.html");
             Desktop.getDesktop().open(path);
         }catch (IOException ex) {
         }
+
+        }else{
+            JOptionPane.showMessageDialog(null, "Su analisis tiene algun error, No se puede Realizar el Archivo de Tokens");
+            //Codigo de analizador por la izquierda}
+        
+        }
         // TODO add your handling code here:
     }//GEN-LAST:event_jBExportActionPerformed
-
+/**
+     * Salir de la Aplicación
+     * @param evt 
+     */
     private void jBExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExitActionPerformed
         System.exit(0);
      // TODO add your handling code here:
     }//GEN-LAST:event_jBExitActionPerformed
-
+/**
+     * Ir a Home
+     * @param evt 
+     */
     private void jBHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBHomeActionPerformed
         this.setVisible(false);
         new Bienvenida().setVisible(true);
 // TODO add your handling code here:
     }//GEN-LAST:event_jBHomeActionPerformed
 
+    /**
+     * Método para analizar
+     * @param evt 
+     */
     private void jBAnalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAnalizarActionPerformed
       String almacenA = jTextArea1.getText();   
         String L="";
@@ -527,6 +562,15 @@ public class Analizador extends javax.swing.JFrame {
       System.out.println("Operacionales: "+ ConOperacional + " Relacionales: " + ConOperacional + " Agrupación: "+ ConAgrupacion+ " Errores:" + ConERROR );   
         // TODO add your handling code here:
     }//GEN-LAST:event_jBAnalizarActionPerformed
+/**
+     * Método para mostrar la tabla
+     * @param evt 
+     */
+    private void ButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonSalirActionPerformed
+      this.setVisible(false);
+      new Diagrama().setVisible(true);        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ButtonSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -564,6 +608,7 @@ public class Analizador extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ButtonSalir;
     private javax.swing.JButton jBAnalizar;
     private javax.swing.JButton jBClean;
     private javax.swing.JButton jBError;
@@ -576,5 +621,6 @@ public class Analizador extends javax.swing.JFrame {
     private javax.swing.JLabel jName;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
+    public java.awt.TextArea jTextArea2;
     // End of variables declaration//GEN-END:variables
 }

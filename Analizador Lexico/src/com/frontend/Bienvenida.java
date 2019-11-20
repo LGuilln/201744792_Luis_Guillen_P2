@@ -122,12 +122,14 @@ public class Bienvenida extends javax.swing.JFrame {
     private void jBManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBManualActionPerformed
          try {
             File path;
-            path = new File ("C:\\Users\\luedu\\Desktop\\LEGR_P2\\Analizador Lexico\\Manual Técnico P_2, LEGR.docx");
+            path = new File ("C:\\Users\\luedu\\Desktop\\LEGR_P2\\Analizador Lexico\\Documentacion");
             Desktop.getDesktop().open(path);
         }catch (IOException ex) {
         }
 
         // TODO add your handling code here:
+        /* Punto analizador de Texto de la gramatica de la base de cada factor de 1 a 1
+        */
     }//GEN-LAST:event_jBManualActionPerformed
 
     /**
