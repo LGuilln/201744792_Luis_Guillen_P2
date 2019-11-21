@@ -20,19 +20,19 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import com.backend.Lexico;
 import com.backend.Validacion_T;
 
-
 /**
  *
  * @author luedu
- */    
+ */
 public class Analizador extends javax.swing.JFrame {
 //mis atributos
+
     JFileChooser seleccionar = new JFileChooser();
-    FileFilter filter = new FileNameExtensionFilter("Archivo de Texto (.txt)",".txt");
+    FileFilter filter = new FileNameExtensionFilter("Archivo de Texto (.txt)", ".txt");
     File archivo;
     FileInputStream entrada;
     FileOutputStream salida;
-    
+
     JFileChooser ArchivoLeer;
     File archivo1;
     String linea;
@@ -47,46 +47,40 @@ public class Analizador extends javax.swing.JFrame {
     BufferedReader entrada1;
     File leer;
 
-
-    public static String [] base; //vector almacena
-    public static String [] reconoce;
+    public static String[] base; //vector almacena
+    public static String[] reconoce;
     public String Almacena;
     public int ConERROR;
 
     //variables para mandar
     String palabra;
 
-    public int fil=0;
-    public int colu=0;
+    public int fil = 0;
+    public int colu = 0;
     int No = 0;
-    public int salto=0;
+    public int salto = 0;
 
-    public int fila1=0;
-    public int columna1=0;
+    public int fila1 = 0;
+    public int columna1 = 0;
     public int[] Rfila;
-    public int [] Rcolumna;
+    public int[] Rcolumna;
 
-    public String [] Errores;
-
-
+    public String[] Errores;
 
     //TextArea T_texto;
+    char[] caracter = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'ñ', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'Ñ', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'};
 
-    char[] caracter = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n','ñ', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N','Ñ', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'};
-
-
-    String identificadores= "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z";
+    String identificadores = "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z";
     String numeros = "0,1,2,3,4,5,6,7,8,9";
-    String operacionales ="+,-,*,/,^,**,//,++,--,^^";
-    String [] agrupacion ={"(,),[,],{,}"};
-    String [] relacionales= {"<,>,==,="};
-    String [] signo= {",;"};
-    
-    String [] errores1;
+    String operacionales = "+,-,*,/,^,**,//,++,--,^^";
+    String[] agrupacion = {"(,),[,],{,}"};
+    String[] relacionales = {"<,>,==,="};
+    String[] signo = {",;"};
+
+    String[] errores1;
     private Object data;
     String Copiar;
 
-    
     /**
      * Creates new form Analizador
      */
@@ -96,42 +90,44 @@ public class Analizador extends javax.swing.JFrame {
 
     }
 
-     /**
+    /**
      * Método para abrir el archivo de entrada
-     * @param evt 
+     *
+     * @param evt
      */
-    public String AbrirArchivo(File archivo){
+    public String AbrirArchivo(File archivo) {
         String docu = "";
         try {
-            entrada= new FileInputStream(archivo);
+            entrada = new FileInputStream(archivo);
             int ascci;
-            while ((ascci=entrada.read()) !=-1) {                
-                char caracter=(char)ascci;
-                docu+=caracter;
+            while ((ascci = entrada.read()) != -1) {
+                char caracter = (char) ascci;
+                docu += caracter;
             }
         } catch (Exception e) {
         }
         return docu;
     }
-    
+
     /**
      * Método para guardar archivo
+     *
      * @param archivo
      * @param docu
-     * @return 
+     * @return
      */
-    public String GuardarArchivo(File archivo, String docu){
-        String mensaje= null;
+    public String GuardarArchivo(File archivo, String docu) {
+        String mensaje = null;
         try {
             salida = new FileOutputStream(archivo);
-            byte[] bytxt= docu.getBytes();
+            byte[] bytxt = docu.getBytes();
             salida.write(bytxt);
-            mensaje="Archivo guardado";
+            mensaje = "Archivo guardado";
         } catch (Exception e) {
         }
         return mensaje;
     }
-   
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -262,32 +258,32 @@ public class Analizador extends javax.swing.JFrame {
 
     private void jBErrorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBErrorActionPerformed
 
-        String ErrorDeToken= jTextArea1.getText();
-        int contadorToken=0;
-        String raiz2="";
-        int numero=0;
-        String[] Error1 = new String [1000000];
+        String ErrorDeToken = jTextArea1.getText();
+        int contadorToken = 0;
+        String raiz2 = "";
+        int numero = 0;
+        String[] Error1 = new String[1000000];
         String[] vacio = new String[1000000];
-        int existe1=0;
-        do{
-            raiz2=""+ErrorDeToken.charAt(contadorToken);
-            if (raiz2.equals("@")){
+        int existe1 = 0;
+        do {
+            raiz2 = "" + ErrorDeToken.charAt(contadorToken);
+            if (raiz2.equals("@")) {
                 System.out.println("existe un @");
-                Error1[existe1]="@";
+                Error1[existe1] = "@";
                 existe1++;
-            }else if(raiz2.equals("#")){
-                Error1[existe1]="#";
+            } else if (raiz2.equals("#")) {
+                Error1[existe1] = "#";
                 existe1++;
-            }else{
-                vacio[contadorToken]="";
+            } else {
+                vacio[contadorToken] = "";
             }
             contadorToken++;
-        }while(contadorToken <ErrorDeToken.length());
-        System.out.println("El existe1 tiene="+existe1);
+        } while (contadorToken < ErrorDeToken.length());
+        System.out.println("El existe1 tiene=" + existe1);
 
-        try{
+        try {
             FileWriter fw = new FileWriter("Analizados/Error.html");
-            fw.write("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />" + "\n"  + "\n");
+            fw.write("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />" + "\n" + "\n");
             fw.write("<HTML><HEAD><TITLE>LENGUAJES FORMALES DE PROGRAMACIÓN</TITLE></HEAD>" + "\n" + "\n");
             fw.write("<H1><CENTER><B><FONT SIZE=\"9\" COLOR=\"BLACK\">LISTADO DE ERRORES" + "</FONT></B></H1>" + "\n" + "\n");
             fw.write("<HR>" + "\n" + "\n");
@@ -301,12 +297,12 @@ public class Analizador extends javax.swing.JFrame {
             String[] result = jTextArea1.getText().split("\\s");
             // Nodo registro = new Nodo();
             //registro = lista.getInicio();
-            for(int so=0; so<existe1;so++){
+            for (int so = 0; so < existe1; so++) {
                 numero++;
                 fw.write("	<TR>\n");
                 fw.write("	<TD ALIGN=\"CENTER\"><FONT COLOR=\"RED\">" + numero + "</FONT></TD>\n");
                 fw.write("	<TD ALIGN=\"CENTER\"><FONT COLOR=\"GREEN\">" + Error1[so] + "</FONT></TD>\n");
-                fw.write("	<TD ALIGN=\"CENTER\"><FONT COLOR=\"GREEN\">" + "Error Lexico"  + "</FONT></TD>\n");
+                fw.write("	<TD ALIGN=\"CENTER\"><FONT COLOR=\"GREEN\">" + "Error Lexico" + "</FONT></TD>\n");
 
                 fw.write("	</TR>\n");
 
@@ -316,90 +312,93 @@ public class Analizador extends javax.swing.JFrame {
             fw.flush();
             fw.close();
 
-        }catch(IOException er){
+        } catch (IOException er) {
             System.out.println(er);
         }
-         try {
+        try {
             File path;
-            path = new File ("C:\\Users\\luedu\\Desktop\\LEGR_P2\\Analizador Lexico\\Analizados\\Error.html");
+            path = new File("C:\\Users\\luedu\\Desktop\\LEGR_P2\\Analizador Lexico\\Analizados\\Error.html");
             Desktop.getDesktop().open(path);
-        }catch (IOException ex) {
+        } catch (IOException ex) {
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_jBErrorActionPerformed
-/**
+    /**
      * Botón de guardar mi txt
-     * @param evt 
+     *
+     * @param evt
      */
     private void jBSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSaveActionPerformed
-        if (seleccionar.showDialog(null, "Guardar")==JFileChooser.APPROVE_OPTION) {
-            archivo=seleccionar.getSelectedFile();
+        if (seleccionar.showDialog(null, "Guardar") == JFileChooser.APPROVE_OPTION) {
+            archivo = seleccionar.getSelectedFile();
             if (archivo.getName().endsWith("txt")) {
-                String Documento= jTextArea1.getText();
+                String Documento = jTextArea1.getText();
                 String mensaje = GuardarArchivo(archivo, Documento);
-                if (mensaje!=null) {
+                if (mensaje != null) {
                     JOptionPane.showMessageDialog(null, mensaje);
-                    
-                    
-                }else{
+
+                } else {
                     JOptionPane.showMessageDialog(null, "Archivo No Compatible");
-                    
+
                 }
-                
-            }else{
+
+            } else {
                 JOptionPane.showMessageDialog(null, "Guardar Documento de texto");
             }
-        }      
+        }
         // TODO add your handling code here:
     }//GEN-LAST:event_jBSaveActionPerformed
 
-     /**
+    /**
      * Botón para Limpiar area de Texto
-     * @param evt 
+     *
+     * @param evt
      */
     private void jBCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCleanActionPerformed
-        jTextArea1.setText(""); 
+        jTextArea1.setText("");
         // TODO add your handling code here:
     }//GEN-LAST:event_jBCleanActionPerformed
- /**
+    /**
      * Método para abrir un archivo de Texto
-     * @param evt 
+     *
+     * @param evt
      */
-    
+
     private void jBOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBOpenActionPerformed
 
-        if (seleccionar.showDialog(null, "Abrir")==JFileChooser.APPROVE_OPTION) {
-            FileFilter filter = new FileNameExtensionFilter("Archivo de Texto (.txt)",".txt");
-            archivo=seleccionar.getSelectedFile();
+        if (seleccionar.showDialog(null, "Abrir") == JFileChooser.APPROVE_OPTION) {
+            FileFilter filter = new FileNameExtensionFilter("Archivo de Texto (.txt)", ".txt");
+            archivo = seleccionar.getSelectedFile();
             if (archivo.canRead()) {
                 if (archivo.getName().endsWith("txt")) {
-                String documento = AbrirArchivo(archivo);
-                jTextArea1.setText(documento);               
-            }else{
-                JOptionPane.showMessageDialog(null, "Archivo no disponible");
-            }
+                    String documento = AbrirArchivo(archivo);
+                    jTextArea1.setText(documento);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Archivo no disponible");
+                }
             }
         }
-          // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_jBOpenActionPerformed
 
     /**
      * Método para exportar tabla
-     * @param evt 
+     *
+     * @param evt
      */
-    
+
     private void jBExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExportActionPerformed
-        int numero=0;
-        if (ConERROR<1){
+        int numero = 0;
+        if (ConERROR < 1) {
 
             String b = jTextArea1.getText();
             base = jTextArea1.getText().split("\\s");
             //String[] o=base;
-            String L="";
+            String L = "";
 
-            try{
+            try {
                 FileWriter fw = new FileWriter("Analizados/Tokens.html");
-                fw.write("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />" + "\n"  + "\n");
+                fw.write("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />" + "\n" + "\n");
                 fw.write("<HTML><HEAD><TITLE>LENGUAJES FORMALES DE PROGRAMACIÓN</TITLE></HEAD>" + "\n" + "\n");
                 fw.write("<H1><CENTER><B><FONT SIZE=\"9\" COLOR=\"BLUE\">LISTADO DE TOKEN'S</FONT></B><BR></H1>" + "\n" + "\n");
                 fw.write("<HR>" + "\n" + "\n");
@@ -414,41 +413,41 @@ public class Analizador extends javax.swing.JFrame {
                 fw.write("	<TD ALIGN=\"CENTER\"><FONT COLOR=\"BLACK\"><B>CÁRACTERES</B></FONT></TD>\n");
                 fw.write("	</TR>\n");
 
-                for (int i=0; i<base.length;i++){
+                for (int i = 0; i < base.length; i++) {
                     numero++;
 
                     fw.write("	<TR>\n");
                     fw.write("	<TD ALIGN=\"CENTER\"><FONT COLOR=\"RED\">" + numero + "</FONT></TD>\n");
                     fw.write("	<TD ALIGN=\"CENTER\"><FONT COLOR=\"BLUE\">" + base[i] + "</FONT></TD>\n");
 
-                    if (base[i].equals("*") | base[i].equals("+")| base[i].equals("/")| base[i].equals("-") ){
+                    if (base[i].equals("*") | base[i].equals("+") | base[i].equals("/") | base[i].equals("-")) {
                         fw.write("	<TD ALIGN=\"CENTER\"><FONT COLOR=\"BLUE\">" + "Operacional" + "</FONT></TD>\n");
 
-                    }else if (base[i].equals("(") | base[i].equals(")") | base[i].equals("[") | base[i].equals("]") | base[i].equals("{") | base[i].equals("}")){
+                    } else if (base[i].equals("(") | base[i].equals(")") | base[i].equals("[") | base[i].equals("]") | base[i].equals("{") | base[i].equals("}")) {
                         fw.write("	<TD ALIGN=\"CENTER\"><FONT COLOR=\"BLUE\">" + "Agrupación" + "</FONT></TD>\n");
 
-                    }else if (base[i].equals("<") | base[i].equals(">") | base[i].equals("==") | base[i].equals("=")){
+                    } else if (base[i].equals("<") | base[i].equals(">") | base[i].equals("==") | base[i].equals("=")) {
                         fw.write("	<TD ALIGN=\"CENTER\"><FONT COLOR=\"BLUE\">" + "Relacionales" + "</FONT></TD>\n");
 
-                    }else if (base[i].equals("")){
+                    } else if (base[i].equals("")) {
                         colu++;
                         fw.write("	<TD ALIGN=\"CENTER\"><FONT COLOR=\"BLUE\">" + "Espacio" + "</FONT></TD>\n");
 
-                    }else if (base[i].equals(",") | base[i].equals(":") | base[i].equals(";") | base[i].equals(".")){
+                    } else if (base[i].equals(",") | base[i].equals(":") | base[i].equals(";") | base[i].equals(".")) {
                         fw.write("	<TD ALIGN=\"CENTER\"><FONT COLOR=\"BLUE\">" + "Signo" + "</FONT></TD>\n");
 
-                    }else if (base[i].equals("0") | base[i].equals("1") | base[i].equals("2") | base[i].equals("3") | base[i].equals("4") | base[i].equals("5") | base[i].equals("6") | base[i].equals("7") | base[i].equals("8") | base[i].equals("9")   ){
+                    } else if (base[i].equals("0") | base[i].equals("1") | base[i].equals("2") | base[i].equals("3") | base[i].equals("4") | base[i].equals("5") | base[i].equals("6") | base[i].equals("7") | base[i].equals("8") | base[i].equals("9")) {
                         fw.write("	<TD ALIGN=\"CENTER\"><FONT COLOR=\"BLUE\">" + "Número" + "</FONT></TD>\n");
 
-                    }else if (base[i].equals(identificadores)){
+                    } else if (base[i].equals(identificadores)) {
                         fw.write("	<TD ALIGN=\"CENTER\"><FONT COLOR=\"BLUE\">" + "Palabras" + "</FONT></TD>\n");
 
-                    } else if(base[i].equals("\n") ){
+                    } else if (base[i].equals("\n")) {
                         fw.write("	<TD ALIGN=\"CENTER\"><FONT COLOR=\"BLUE\">" + "Salto de linea" + "</FONT></TD>\n");
-                        colu=0;
+                        colu = 0;
                         fil++;
 
-                    }else{
+                    } else {
                         fw.write("	<TD ALIGN=\"CENTER\"><FONT COLOR=\"BLUE\">" + "ID" + "</FONT></TD>\n");
                     }
 
@@ -458,7 +457,7 @@ public class Analizador extends javax.swing.JFrame {
 
                     //   separa las palabras y cuenta las veces que aparece.
                     String t = base[i];
-                    String [] pala = t.split("");
+                    String[] pala = t.split("");
                     int canti = pala.length;
 
                     fw.write("	<TD ALIGN=\"CENTER\"><FONT COLOR=\"BLUE\">" + canti + "</FONT></TD>\n");
@@ -466,38 +465,40 @@ public class Analizador extends javax.swing.JFrame {
 
                 }
                 //   }
-            fw.write("</TABLE>" + "\n");
-            fw.flush();
-            fw.close();
+                fw.write("</TABLE>" + "\n");
+                fw.flush();
+                fw.close();
 
-        }catch(IOException er){
-            System.out.println(er);
-        }
-        try {
-            File path;
-            path = new File ("C:\\Users\\luedu\\Desktop\\LEGR_P2\\Analizador Lexico\\Analizados\\Tokens.html");
-            Desktop.getDesktop().open(path);
-        }catch (IOException ex) {
-        }
+            } catch (IOException er) {
+                System.out.println(er);
+            }
+            try {
+                File path;
+                path = new File("C:\\Users\\luedu\\Desktop\\LEGR_P2\\Analizador Lexico\\Analizados\\Tokens.html");
+                Desktop.getDesktop().open(path);
+            } catch (IOException ex) {
+            }
 
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Su analisis tiene algun error, No se puede Realizar el Archivo de Tokens");
             //Codigo de analizador por la izquierda}
-        
+
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_jBExportActionPerformed
-/**
+    /**
      * Salir de la Aplicación
-     * @param evt 
+     *
+     * @param evt
      */
     private void jBExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExitActionPerformed
         System.exit(0);
-     // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_jBExitActionPerformed
-/**
+    /**
      * Ir a Home
-     * @param evt 
+     *
+     * @param evt
      */
     private void jBHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBHomeActionPerformed
         this.setVisible(false);
@@ -507,78 +508,80 @@ public class Analizador extends javax.swing.JFrame {
 
     /**
      * Método para analizar
-     * @param evt 
+     *
+     * @param evt
      */
     private void jBAnalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAnalizarActionPerformed
-      String almacenA = jTextArea1.getText();   
-        String L="";
-        int ConOperacional=0;
-        int ConAgrupacion=0;
-        int ConRelacionales =0;
-        int ConLetra=0;
-        int ConNumero=0;
-       
-        ConERROR=0;
-        
-       for(int j=0;j<=almacenA.length()-1;j++){
-             L=""+almacenA.charAt(j);            
-             
-              if (L.equals("+") | L.equals("-")| L.equals("*")| L.equals("/")| L .equals("^")| L .equals("**")|  L.equals("//")| L.equals("^^") ){
-                          
-                          ConOperacional++;
-                          System.out.println("Operacional" +" * "+ConOperacional);
-                          
-                      }else if ((L.equals("(") | L.equals(")") | L.equals("[") | L.equals("]") | L.equals(":") || L.equals(";") |  L.equals(",") | L.equals(";") | L.equals(":") | L.equals("."))) {
-                          
-                           ConAgrupacion++;
-                           System.out.println("Agrupación " + " * "+ConAgrupacion);
-                      
-                      }else if ((L.equals("<") | L.equals(">") | L.equals("==") | (L.equals("=")))) {
-                       
-                           ConRelacionales++;
-                           System.out.println("Relacional"+ " * "+ConRelacionales);
-                      
-                      }else if ((L.equals("@") )){
-                          //jtA.setText("@" + "\n");
-                         rn="@";
-                          
-                          ConERROR++;
-                           System.out.println("ERROR"+" * "+ConERROR);
-                             
-                      }else if ((L.equals("#") )){
-                          //jtA.setText("@" + "\n");
-                          rn="#";
-                          
-                          ConERROR++;
-                           System.out.println("ERROR"+" * "+ConERROR);     
-              }else if ((L.equals("0") |L.equals("1") | L.equals("2") | L.equals("3") | L.equals("4") | L.equals("5") | L.equals("6") | L.equals("7")  | L.equals("8") | L.equals("9")   )){
-                 
-                   ConNumero++;
-                   System.out.println("Número "+" * "+ConLetra);
-              
-              }else if (L.equals(identificadores)){
-                  ConLetra++;
-                  System.out.println("Letra"+" * "+ConLetra);
-              }else if (L.equals("\n")){
-                  fila1++;
-                  columna1=0;
-              }else if (L.equals(" ")){
-                  columna1++;
-                  System.out.println("COLUMNA: " + columna1 );
-              }else{
-                  System.out.println("ID");
-              }       
+        String almacenA = jTextArea1.getText();
+        String L = "";
+        int ConOperacional = 0;
+        int ConAgrupacion = 0;
+        int ConRelacionales = 0;
+        int ConLetra = 0;
+        int ConNumero = 0;
+
+        ConERROR = 0;
+
+        for (int j = 0; j <= almacenA.length() - 1; j++) {
+            L = "" + almacenA.charAt(j);
+
+            if (L.equals("+") | L.equals("-") | L.equals("*") | L.equals("/") | L.equals("^") | L.equals("**") | L.equals("//") | L.equals("^^")) {
+
+                ConOperacional++;
+                System.out.println("Operacional" + " * " + ConOperacional);
+
+            } else if ((L.equals("(") | L.equals(")") | L.equals("[") | L.equals("]") | L.equals(":") || L.equals(";") | L.equals(",") | L.equals(";") | L.equals(":") | L.equals("."))) {
+
+                ConAgrupacion++;
+                System.out.println("Agrupación " + " * " + ConAgrupacion);
+
+            } else if ((L.equals("<") | L.equals(">") | L.equals("==") | (L.equals("=")))) {
+
+                ConRelacionales++;
+                System.out.println("Relacional" + " * " + ConRelacionales);
+
+            } else if ((L.equals("@"))) {
+                //jtA.setText("@" + "\n");
+                rn = "@";
+
+                ConERROR++;
+                System.out.println("ERROR" + " * " + ConERROR);
+
+            } else if ((L.equals("#"))) {
+                //jtA.setText("@" + "\n");
+                rn = "#";
+
+                ConERROR++;
+                System.out.println("ERROR" + " * " + ConERROR);
+            } else if ((L.equals("0") | L.equals("1") | L.equals("2") | L.equals("3") | L.equals("4") | L.equals("5") | L.equals("6") | L.equals("7") | L.equals("8") | L.equals("9"))) {
+
+                ConNumero++;
+                System.out.println("Número " + " * " + ConLetra);
+
+            } else if (L.equals(identificadores)) {
+                ConLetra++;
+                System.out.println("Letra" + " * " + ConLetra);
+            } else if (L.equals("\n")) {
+                fila1++;
+                columna1 = 0;
+            } else if (L.equals(" ")) {
+                columna1++;
+                System.out.println("COLUMNA: " + columna1);
+            } else {
+                System.out.println("ID");
+            }
         }
-      System.out.println("Operacionales: "+ ConOperacional + " Relacionales: " + ConOperacional + " Agrupación: "+ ConAgrupacion+ " Errores:" + ConERROR );   
+        System.out.println("Operacionales: " + ConOperacional + " Relacionales: " + ConOperacional + " Agrupación: " + ConAgrupacion + " Errores:" + ConERROR);
         // TODO add your handling code here:
     }//GEN-LAST:event_jBAnalizarActionPerformed
-/**
+    /**
      * Método para mostrar la tabla
-     * @param evt 
+     *
+     * @param evt
      */
     private void ButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonSalirActionPerformed
-      this.setVisible(false);
-      new Diagrama().setVisible(true);        
+        this.setVisible(false);
+        new Diagrama().setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_ButtonSalirActionPerformed
 

@@ -32,26 +32,22 @@ public class Diagrama extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
-        jName = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jName = new javax.swing.JLabel();
         jBExit = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         jBHome = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LL1.jpg"))); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 1780, 620));
-
         jName.setBackground(new java.awt.Color(102, 255, 102));
         jName.setFont(new java.awt.Font("Arial Black", 0, 48)); // NOI18N
         jName.setForeground(new java.awt.Color(51, 255, 51));
         jName.setText("\"Tabla de Analisis Sintactico\"");
         jName.setAutoscrolls(true);
-        getContentPane().add(jName, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 30, -1, -1));
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1330, 700));
+        getContentPane().add(jName, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 30, -1, -1));
 
         jBExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit icon.png"))); // NOI18N
         jBExit.addActionListener(new java.awt.event.ActionListener() {
@@ -59,7 +55,10 @@ public class Diagrama extends javax.swing.JFrame {
                 jBExitActionPerformed(evt);
             }
         });
-        getContentPane().add(jBExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(1460, 700, 70, 70));
+        getContentPane().add(jBExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 590, 70, 70));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LL1.jpg"))); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 1450, 620));
 
         jBHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/home.png"))); // NOI18N
         jBHome.addActionListener(new java.awt.event.ActionListener() {
@@ -67,7 +66,7 @@ public class Diagrama extends javax.swing.JFrame {
                 jBHomeActionPerformed(evt);
             }
         });
-        getContentPane().add(jBHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 700, 70, 70));
+        getContentPane().add(jBHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 590, 70, 70));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

@@ -20,5 +20,5 @@ public class AnalizadorLexico {
         new Bienvenida().setVisible(true);
         // TODO code application logic here
     }
-    
+
 }

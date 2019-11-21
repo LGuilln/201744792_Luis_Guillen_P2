@@ -109,41 +109,41 @@ public class Bienvenida extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExitActionPerformed
-        System.exit (0);
+        System.exit(0);
         // TODO add your handling code here:
     }//GEN-LAST:event_jBExitActionPerformed
 
     private void jBAnalizadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAnalizadorActionPerformed
-        this.setVisible(false); 
+        this.setVisible(false);
         new Analizador().setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_jBAnalizadorActionPerformed
 
     private void jBManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBManualActionPerformed
-         try {
+        try {
             File path;
-            path = new File ("C:\\Users\\luedu\\Desktop\\LEGR_P2\\Analizador Lexico\\Documentacion");
+            path = new File("C:\\Users\\luedu\\Desktop\\LEGR_P2\\Analizador Lexico\\Documentacion");
             Desktop.getDesktop().open(path);
-        }catch (IOException ex) {
+        } catch (IOException ex) {
         }
 
-         try {
+        try {
             File path;
-            path = new File ("C:\\Users\\luedu\\Desktop\\LEGR_P2\\Analizador Lexico\\Documentacion\\Manual Técnico P_2, LEGR.pdf");
+            path = new File("C:\\Users\\luedu\\Desktop\\LEGR_P2\\Analizador Lexico\\Documentacion\\Manual Técnico P_2, LEGR.pdf");
             Desktop.getDesktop().open(path);
-        }catch (IOException ex) {
+        } catch (IOException ex) {
         }
-        
-       try {
+
+        try {
             File path;
-            path = new File ("C:\\Users\\luedu\\Desktop\\LEGR_P2\\Analizador Lexico\\Documentacion\\Manual de Usuario P_2, LEGR.pdf");
+            path = new File("C:\\Users\\luedu\\Desktop\\LEGR_P2\\Analizador Lexico\\Documentacion\\Manual de Usuario P_2, LEGR.pdf");
             Desktop.getDesktop().open(path);
-        }catch (IOException ex) {
-        } 
-       
+        } catch (IOException ex) {
+        }
+
         // TODO add your handling code here:
         /* Punto analizador de Texto de la gramatica de la base de cada factor de 1 a 1
-        */
+         */
     }//GEN-LAST:event_jBManualActionPerformed
 
     /**
