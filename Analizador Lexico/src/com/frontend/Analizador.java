@@ -138,18 +138,18 @@ public class Analizador extends javax.swing.JFrame {
     private void initComponents() {
 
         jBError = new javax.swing.JButton();
-        jBClean = new javax.swing.JButton();
+        jBToken = new javax.swing.JButton();
         jBOpen = new javax.swing.JButton();
         jBExport = new javax.swing.JButton();
         ButtonSalir = new javax.swing.JButton();
         jBExit = new javax.swing.JButton();
         jBHome = new javax.swing.JButton();
+        jBClean1 = new javax.swing.JButton();
         jBSave = new javax.swing.JButton();
         jTextArea2 = new java.awt.TextArea();
         jBAnalizar = new javax.swing.JButton();
         jName = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -164,13 +164,13 @@ public class Analizador extends javax.swing.JFrame {
         });
         getContentPane().add(jBError, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 350, 70, -1));
 
-        jBClean.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/clean.jpg"))); // NOI18N
-        jBClean.addActionListener(new java.awt.event.ActionListener() {
+        jBToken.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/download.png"))); // NOI18N
+        jBToken.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBCleanActionPerformed(evt);
+                jBTokenActionPerformed(evt);
             }
         });
-        getContentPane().add(jBClean, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 480, 70, 70));
+        getContentPane().add(jBToken, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 110, 60, 60));
 
         jBOpen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/open.png"))); // NOI18N
         jBOpen.addActionListener(new java.awt.event.ActionListener() {
@@ -178,7 +178,7 @@ public class Analizador extends javax.swing.JFrame {
                 jBOpenActionPerformed(evt);
             }
         });
-        getContentPane().add(jBOpen, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 60, 60));
+        getContentPane().add(jBOpen, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, 60, 60));
 
         jBExport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/expor.png"))); // NOI18N
         jBExport.addActionListener(new java.awt.event.ActionListener() {
@@ -214,6 +214,14 @@ public class Analizador extends javax.swing.JFrame {
         });
         getContentPane().add(jBHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 640, 70, 70));
 
+        jBClean1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/clean.jpg"))); // NOI18N
+        jBClean1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBClean1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBClean1, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 480, 70, 70));
+
         jBSave.setBackground(new java.awt.Color(102, 255, 102));
         jBSave.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
         jBSave.setForeground(new java.awt.Color(255, 0, 51));
@@ -224,7 +232,7 @@ public class Analizador extends javax.swing.JFrame {
                 jBSaveActionPerformed(evt);
             }
         });
-        getContentPane().add(jBSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 110, 60, 60));
+        getContentPane().add(jBSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 110, 60, 60));
         getContentPane().add(jTextArea2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 600, 500, 120));
 
         jBAnalizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/analizar.png"))); // NOI18N
@@ -233,7 +241,7 @@ public class Analizador extends javax.swing.JFrame {
                 jBAnalizarActionPerformed(evt);
             }
         });
-        getContentPane().add(jBAnalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 110, 60, 60));
+        getContentPane().add(jBAnalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 60, 60));
 
         jName.setBackground(new java.awt.Color(102, 255, 102));
         jName.setFont(new java.awt.Font("Arial Black", 0, 48)); // NOI18N
@@ -354,10 +362,13 @@ public class Analizador extends javax.swing.JFrame {
      *
      * @param evt
      */
-    private void jBCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCleanActionPerformed
-        jTextArea1.setText("");
+    private void jBTokenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTokenActionPerformed
+        Tokens entrada2 = new Tokens();
+        this.setVisible(false);
+        new Tokens().setVisible(true);
+          
         // TODO add your handling code here:
-    }//GEN-LAST:event_jBCleanActionPerformed
+    }//GEN-LAST:event_jBTokenActionPerformed
     /**
      * Método para abrir un archivo de Texto
      *
@@ -573,6 +584,7 @@ public class Analizador extends javax.swing.JFrame {
         }
         System.out.println("Operacionales: " + ConOperacional + " Relacionales: " + ConOperacional + " Agrupación: " + ConAgrupacion + " Errores:" + ConERROR);
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_jBAnalizarActionPerformed
     /**
      * Método para mostrar la tabla
@@ -584,6 +596,11 @@ public class Analizador extends javax.swing.JFrame {
         new Diagrama().setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_ButtonSalirActionPerformed
+
+    private void jBClean1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBClean1ActionPerformed
+    jTextArea1.setText("");
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBClean1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -623,17 +640,18 @@ public class Analizador extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButtonSalir;
     private javax.swing.JButton jBAnalizar;
-    private javax.swing.JButton jBClean;
+    private javax.swing.JButton jBClean1;
     private javax.swing.JButton jBError;
     private javax.swing.JButton jBExit;
     private javax.swing.JButton jBExport;
     private javax.swing.JButton jBHome;
     private javax.swing.JButton jBOpen;
     private javax.swing.JButton jBSave;
+    private javax.swing.JButton jBToken;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jName;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    public static final javax.swing.JTextArea jTextArea1 = new javax.swing.JTextArea();
     public java.awt.TextArea jTextArea2;
     // End of variables declaration//GEN-END:variables
 }
