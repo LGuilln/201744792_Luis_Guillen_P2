@@ -127,6 +127,20 @@ public class Bienvenida extends javax.swing.JFrame {
         }catch (IOException ex) {
         }
 
+         try {
+            File path;
+            path = new File ("C:\\Users\\luedu\\Desktop\\LEGR_P2\\Analizador Lexico\\Documentacion\\Manual Técnico P_2, LEGR.pdf");
+            Desktop.getDesktop().open(path);
+        }catch (IOException ex) {
+        }
+        
+       try {
+            File path;
+            path = new File ("C:\\Users\\luedu\\Desktop\\LEGR_P2\\Analizador Lexico\\Documentacion\\Manual de Usuario P_2, LEGR.pdf");
+            Desktop.getDesktop().open(path);
+        }catch (IOException ex) {
+        } 
+       
         // TODO add your handling code here:
         /* Punto analizador de Texto de la gramatica de la base de cada factor de 1 a 1
         */

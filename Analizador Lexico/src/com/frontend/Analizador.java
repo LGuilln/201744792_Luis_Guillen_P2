@@ -96,6 +96,10 @@ public class Analizador extends javax.swing.JFrame {
 
     }
 
+     /**
+     * Método para abrir el archivo de entrada
+     * @param evt 
+     */
     public String AbrirArchivo(File archivo){
         String docu = "";
         try {
@@ -110,6 +114,12 @@ public class Analizador extends javax.swing.JFrame {
         return docu;
     }
     
+    /**
+     * Método para guardar archivo
+     * @param archivo
+     * @param docu
+     * @return 
+     */
     public String GuardarArchivo(File archivo, String docu){
         String mensaje= null;
         try {
@@ -295,8 +305,8 @@ public class Analizador extends javax.swing.JFrame {
                 numero++;
                 fw.write("	<TR>\n");
                 fw.write("	<TD ALIGN=\"CENTER\"><FONT COLOR=\"RED\">" + numero + "</FONT></TD>\n");
-                fw.write("	<TD ALIGN=\"CENTER\"><FONT COLOR=\"BLUE\">" + Error1[so] + "</FONT></TD>\n");
-                fw.write("	<TD ALIGN=\"CENTER\"><FONT COLOR=\"BLUE\">" + "Error Lexico"  + "</FONT></TD>\n");
+                fw.write("	<TD ALIGN=\"CENTER\"><FONT COLOR=\"GREEN\">" + Error1[so] + "</FONT></TD>\n");
+                fw.write("	<TD ALIGN=\"CENTER\"><FONT COLOR=\"GREEN\">" + "Error Lexico"  + "</FONT></TD>\n");
 
                 fw.write("	</TR>\n");
 
